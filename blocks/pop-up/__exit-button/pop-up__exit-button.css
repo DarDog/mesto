@@ -9,6 +9,12 @@
   position: absolute;
   top: -40px;
   left: 430px;
+  transition: opacity .3s;
+}
+
+.pop-up__exit-button:hover {
+  opacity: .6;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 880px) {

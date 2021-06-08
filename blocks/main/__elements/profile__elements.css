@@ -3,3 +3,9 @@
   max-width: 880px;
   width: 100%;
 }
+
+@media screen and (max-width: 880px){
+  .main__elements {
+    margin-bottom: 48px;
+  }
+}

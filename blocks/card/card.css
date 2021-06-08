@@ -1,0 +1,8 @@
+.card {
+  background-color: white;
+  display: grid;
+  grid-template-columns: auto 62px;
+  grid-template-rows: repeat(2, minmax(80px, auto));
+  border-radius: 10px;
+  overflow: hidden;
+}

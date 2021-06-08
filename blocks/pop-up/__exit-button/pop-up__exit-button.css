@@ -6,7 +6,16 @@
   width: 40px;
   height: 40px;
   transform: rotate(45deg);
-  position: relative;
-  top: -390px;
-  right: -430px;
+  position: absolute;
+  top: -40px;
+  left: 430px;
+}
+
+@media screen and (max-width: 880px) {
+  .pop-up__exit-button {
+    top: -40px;
+    left: 256px;
+    height: 26px;
+    width: 26px;
+  }
 }

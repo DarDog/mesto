@@ -13,3 +13,10 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+@media screen and (max-width: 880px) {
+  .pop-up__container {
+    min-width: 282px;
+    min-height: 322px;
+  }
+}

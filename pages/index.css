@@ -32,3 +32,11 @@
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/page/__footer/page__foote.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
+/*Блок pop-up*/
+@import url('../blocks/pop-up/pop-up.css');
+@import url('../blocks/pop-up/_opened/pop-up_opened.css');
+@import url('../blocks/pop-up/__container/pop-up__container.css');
+@import url('../blocks/pop-up/__title/pop-up__title.css');
+@import url('../blocks/pop-up/__input/pop-up__input.css');
+@import url('../blocks/pop-up/__submit-button/pop-up__submit-buttone.css');
+@import url('../blocks/pop-up/__exit-button/pop-up__exit-button.css');

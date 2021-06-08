@@ -1,0 +1,21 @@
+.pup-up__submit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  width: 80%;
+  min-height: 50px;
+  margin: 0 0 37px 36px;
+  border: none;
+  border-radius: 2px;
+  transition: opacity .3s;
+}
+
+.pup-up__submit-button:hover {
+  opacity: .8;
+  cursor: pointer;
+}

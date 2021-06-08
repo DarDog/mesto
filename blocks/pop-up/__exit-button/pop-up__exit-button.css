@@ -1,0 +1,12 @@
+.pop-up__exit-button {
+  background-image: url("../../../images/cross-icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+  transform: rotate(45deg);
+  position: relative;
+  top: -390px;
+  right: -430px;
+}

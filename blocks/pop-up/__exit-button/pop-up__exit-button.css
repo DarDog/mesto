@@ -8,7 +8,7 @@
   transform: rotate(45deg);
   position: absolute;
   top: -40px;
-  left: 430px;
+  right: -40px;
   transition: opacity .3s;
 }
 

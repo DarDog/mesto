@@ -25,5 +25,6 @@
   .pop-up__submit-button {
     width: 238px;
     margin: 0 auto 25px;
+    font-size: 14px;
   }
 }

@@ -5,11 +5,16 @@
   line-height: 1.14;
   padding: 0;
   margin: 0;
+  max-width: 450px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 880px){
   .profile__title {
     font-size: 27px;
     line-height: 1.22;
+    max-width: 240px;
   }
 }

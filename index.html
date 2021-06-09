@@ -19,13 +19,15 @@
       <h1 class="profile__title">Жак-Ив Кусто</h1>
       <button class="profile__edit-button"></button>
       <article class="pop-up">
-        <form action="" class="pop-up__container">
+        <div class="pop-up__background">
           <h2 class="pop-up__title">Редактировать профиль</h2>
-          <input type="text" class="pop-up__input" placeholder="Введите ваше имя" id="name-input">
-          <input type="text" class="pop-up__input" placeholder="Расскажите о себе" id="description-input">
-          <button type="submit" class="pop-up__submit-button">Сохранить</button>
+          <form class="pop-up__container" name="editForm">
+            <input type="text" class="pop-up__input" placeholder="Введите ваше имя" name="profileName">
+            <input type="text" class="pop-up__input" placeholder="Расскажите о себе" name="profileDescription">
+            <button type="submit" class="pop-up__submit-button" name="submitButton">Сохранить</button>
+          </form>
           <div class="pop-up__exit-button"></div>
-        </form>
+        </div>
       </article>
       <p class="profile__subtitle">Исследователь океана</p>
     </div>

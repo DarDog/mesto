@@ -1,9 +1,9 @@
 let popUp = document.querySelector('.pop-up'),
     formElement = popUp.querySelector('.pop-up__container'),
-    closeButton = formElement.querySelector('.pop-up__exit-button'),
+    closeButton = document.querySelector('.pop-up__exit-button'),
     editButton = document.querySelector('.profile__edit-button'),
-    nameInput = formElement.querySelector('#name-input'),
-    descriptionInput = formElement.querySelector('#description-input'),
+    nameInput = formElement.querySelector('[name=profileName]'),
+    descriptionInput = formElement.querySelector('[name=profileDescription]'),
     profileName = document.querySelector('.profile__title'),
     profileDescription = document.querySelector('.profile__subtitle');
 

@@ -1,0 +1,6 @@
+@media screen and (max-width: 880px) {
+  .pop-up__exit-button_place_image-pop-up {
+    left: calc(75vw - 26px);
+    width: 26px;
+  }
+}

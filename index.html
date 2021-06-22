@@ -30,20 +30,33 @@
 <footer class="footer page__footer">
   <p class="footer__copyright">&copy;&nbsp;2021 Mesto Russia</p>
 </footer>
-<article class="pop-up">
+<article class="pop-up pop-up_content_edit">
   <div class="pop-up__background">
     <h2 class="pop-up__title">Редактировать профиль</h2>
-    <form class="pop-up__container pop-up__container_disable" name="editForm">
+    <form class="pop-up__container" name="editForm">
       <input type="text" class="pop-up__input" placeholder="Введите ваше имя" name="profileName">
       <input type="text" class="pop-up__input" placeholder="Расскажите о себе" name="profileDescription">
       <button type="submit" class="pop-up__submit-button" name="submitButton">Сохранить</button>
     </form>
-    <form class="pop-up__container pop-up__container_disable" name="addForm">
+    <div class="pop-up__exit-button"></div>
+  </div>
+</article>
+<article class="pop-up pop-up_content_add">
+  <div class="pop-up__background">
+    <h2 class="pop-up__title">Новое место</h2>
+    <form class="pop-up__container" name="addForm">
       <input type="text" class="pop-up__input" placeholder="Название" name="cardName">
       <input type="text" class="pop-up__input" placeholder="Ссылка на картинку" name="cardLink">
       <button type="submit" class="pop-up__submit-button" name="submitButton">Создать</button>
     </form>
     <div class="pop-up__exit-button"></div>
+  </div>
+</article>
+<article class="pop-up pop-up_content_image">
+  <div class="pop-up__image-container">
+    <img src="" alt="" class="pop-up__image">
+    <h2 class="pop-up__image-title"></h2>
+    <div class="pop-up__exit-button pop-up__exit-button_place_image-pop-up"></div>
   </div>
 </article>
 <template id="card_template">

@@ -1,7 +1,10 @@
-const popUp = document.querySelector('.pop-up'),
-    editFormElement = popUp.querySelector('[name=editForm]'),
-    addFormElement = popUp.querySelector('[name=addForm]'),
-    closeButton = document.querySelector('.pop-up__exit-button'),
+const popUp = document.querySelectorAll('.pop-up'),
+    editPopUp = document.querySelector('.pop-up_content_edit'),
+    addPopUp = document.querySelector('.pop-up_content_add'),
+    imagePopUp = document.querySelector('.pop-up_content_image'),
+    editFormElement = document.querySelector('[name=editForm]'),
+    addFormElement = document.querySelector('[name=addForm]'),
+    closeButton = document.querySelectorAll('.pop-up__exit-button'),
     editButton = document.querySelector('.profile__edit-button'),
     addButton = document.querySelector('.profile__add-button'),
     nameInput = editFormElement.querySelector('[name=profileName]'),
@@ -43,22 +46,23 @@ const fillInputs = () => {
 }
 
 const openEditPopUp = () => {
-  popUp.classList.add('pop-up_opened');
-  editFormElement.classList.remove('pop-up__container_disable');
-  addFormElement.classList.add('pop-up__container_disable');
-  popUp.querySelector('.pop-up__title').textContent = 'Редактировать профиль';
+  editPopUp.classList.add('pop-up_opened');
+
   fillInputs();
 }
 
 const openAddPopUp = () => {
-  popUp.classList.add('pop-up_opened');
-  editFormElement.classList.add('pop-up__container_disable');
-  addFormElement.classList.remove('pop-up__container_disable');
-  popUp.querySelector('.pop-up__title').textContent = 'Новое место';
+  addPopUp.classList.add('pop-up_opened');
+}
+
+const openImagePopUp = () => {
+  imagePopUp.classList.add('pop-up_opened');
 }
 
 const closePopUp = () => {
-  popUp.classList.remove('pop-up_opened');
+  popUp.forEach((item) => {
+    item.classList.remove('pop-up_opened');
+  })
 }
 
 const editFormSubmitHandler = (evt) => {
@@ -88,12 +92,19 @@ const getCard = (title, src) => {
 
   cardClone.querySelector('.card__like-button').addEventListener('click', (evt) => {
     evt.target.classList.toggle('card__like-button_active');
-  })
+  });
 
   deleteButton.addEventListener('click', () => {
     const cardsElement = deleteButton.closest('.card');
     cardsElement.remove();
-  })
+  });
+
+  cardClone.querySelector('.card__image').addEventListener('click', (evt) => {
+    openImagePopUp();
+    const evtTarget = evt.target;
+    imagePopUp.querySelector('.pop-up__image').src = evtTarget.src;
+    imagePopUp.querySelector('.pop-up__image-title').textContent = evtTarget.alt;
+  });
 
   cardsPlace.prepend(cardClone)
 }
@@ -108,7 +119,9 @@ getUsersCards(usersCards);
 
 editButton.addEventListener('click', openEditPopUp);
 addButton.addEventListener('click', openAddPopUp);
-closeButton.addEventListener('click', closePopUp);
+closeButton.forEach((item) => {
+  item.addEventListener('click', closePopUp);
+});
 
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 addFormElement.addEventListener('submit', addFormSubmitHandler);

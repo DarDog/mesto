@@ -74,8 +74,6 @@ const editFormSubmitHandler = (evt) => {
 
 const addFormSubmitHandler = (evt) => {
   evt.preventDefault();
-  console.log(cardNameInput.value)
-  console.log(cardSrcInput.value)
   getCard(cardNameInput.value, cardSrcInput.value);
   closePopUp();
 }

@@ -1,10 +1,10 @@
-const popUp = document.querySelectorAll('.pop-up'),
+const popUps = document.querySelectorAll('.pop-up'),
     editPopUp = document.querySelector('.pop-up_content_edit'),
     addPopUp = document.querySelector('.pop-up_content_add'),
     imagePopUp = document.querySelector('.pop-up_content_image'),
     editFormElement = document.querySelector('[name=editForm]'),
     addFormElement = document.querySelector('[name=addForm]'),
-    closeButton = document.querySelectorAll('.pop-up__exit-button'),
+    closeButtons = document.querySelectorAll('.pop-up__exit-button'),
     editButton = document.querySelector('.profile__edit-button'),
     addButton = document.querySelector('.profile__add-button'),
     nameInput = editFormElement.querySelector('[name=profileName]'),
@@ -60,7 +60,7 @@ const openImagePopUp = () => {
 }
 
 const closePopUp = () => {
-  popUp.forEach((item) => {
+  popUps.forEach((item) => {
     item.classList.remove('pop-up_opened');
   })
 }
@@ -117,7 +117,7 @@ getUsersCards(usersCards);
 
 editButton.addEventListener('click', openEditPopUp);
 addButton.addEventListener('click', openAddPopUp);
-closeButton.forEach((item) => {
+closeButtons.forEach((item) => {
   item.addEventListener('click', closePopUp);
 });
 

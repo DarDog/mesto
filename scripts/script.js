@@ -101,6 +101,7 @@ const getCard = (title, src) => {
     openImagePopUp();
     const evtTarget = evt.target;
     imagePopUp.querySelector('.pop-up__image').src = evtTarget.src;
+    imagePopUp.querySelector('.pop-up__image').alt = evtTarget.alt;
     imagePopUp.querySelector('.pop-up__image-title').textContent = evtTarget.alt;
   });
 

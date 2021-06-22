@@ -79,7 +79,8 @@ const addFormSubmitHandler = (evt) => {
 const getCard = (title, src) => {
   const cardTemplate = document.querySelector('#card_template').content,
       cardsPlace = document.querySelector('.elements__cards'),
-      cardClone = cardTemplate.cloneNode(true);
+      cardClone = cardTemplate.cloneNode(true),
+      deleteButton = cardClone.querySelector('.card__delete-button')
 
   cardClone.querySelector('.card__title').textContent = title;
   cardClone.querySelector('.card__image').src = src;
@@ -87,6 +88,11 @@ const getCard = (title, src) => {
 
   cardClone.querySelector('.card__like-button').addEventListener('click', (evt) => {
     evt.target.classList.toggle('card__like-button_active');
+  })
+
+  deleteButton.addEventListener('click', () => {
+    const cardsElement = deleteButton.closest('.card');
+    cardsElement.remove();
   })
 
   cardsPlace.prepend(cardClone)

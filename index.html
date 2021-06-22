@@ -18,67 +18,39 @@
     <div class="profile__info">
       <h1 class="profile__title">Жак-Ив Кусто</h1>
       <button type="button" class="profile__edit-button"></button>
-      <article class="pop-up">
-        <div class="pop-up__background">
-          <h2 class="pop-up__title">Редактировать профиль</h2>
-          <form class="pop-up__container" name="editForm">
-            <input type="text" class="pop-up__input" placeholder="Введите ваше имя" name="profileName">
-            <input type="text" class="pop-up__input" placeholder="Расскажите о себе" name="profileDescription">
-            <button type="submit" class="pop-up__submit-button" name="submitButton">Сохранить</button>
-          </form>
-          <div class="pop-up__exit-button"></div>
-        </div>
-      </article>
       <p class="profile__subtitle">Исследователь океана</p>
     </div>
     <button type="button" class="profile__add-button"></button>
   </section>
   <section class="elements main__elements">
     <ul class="elements__cards">
-<<<<<<< HEAD
-      <li class="card">
-        <img src="images/Burg%20Eltz.jpg" alt="Замок Burg Eltz" class="card__image">
-        <h2 class="card__title">Замок Burg Eltz</h2>
-        <button type="button" class="card__like-button"></button>
-      </li>
-      <li class="card">
-        <img src="images/chertov-most.jpg" alt="Чертов мост" class="card__image">
-        <h2 class="card__title">Сахалин Чертов мост</h2>
-        <button type="button" class="card__like-button"></button>
-      </li>
-      <li class="card">
-        <img src="images/Franch.jpg" alt="Франция" class="card__image">
-        <h2 class="card__title">Франция</h2>
-        <button type="button" class="card__like-button"></button>
-      </li>
-      <li class="card">
-        <img src="images/italy.jpg" alt="Италия" class="card__image">
-        <h2 class="card__title">Италия</h2>
-        <button type="button" class="card__like-button"></button>
-      </li>
-      <li class="card">
-        <img src="images/japan.jpg" alt="Япония" class="card__image">
-        <h2 class="card__title">Япония</h2>
-        <button type="button" class="card__like-button"></button>
-      </li>
-      <li class="card">
-        <img src="images/kholmskoe-vodohranilishe.jpg" alt="Холмское водохранилище" class="card__image">
-        <h2 class="card__title">Сахалин Холмск</h2>
-        <button type="button" class="card__like-button"></button>
-      </li>
-=======
->>>>>>> develop
     </ul>
   </section>
 </main>
 <footer class="footer page__footer">
   <p class="footer__copyright">&copy;&nbsp;2021 Mesto Russia</p>
 </footer>
+<article class="pop-up">
+  <div class="pop-up__background">
+    <h2 class="pop-up__title">Редактировать профиль</h2>
+    <form class="pop-up__container pop-up__container_disable" name="editForm">
+      <input type="text" class="pop-up__input" placeholder="Введите ваше имя" name="profileName">
+      <input type="text" class="pop-up__input" placeholder="Расскажите о себе" name="profileDescription">
+      <button type="submit" class="pop-up__submit-button" name="submitButton">Сохранить</button>
+    </form>
+    <form class="pop-up__container pop-up__container_disable" name="addForm">
+      <input type="text" class="pop-up__input" placeholder="Название" name="cardName">
+      <input type="text" class="pop-up__input" placeholder="Ссылка на картинку" name="cardLink">
+      <button type="submit" class="pop-up__submit-button" name="submitButton">Создать</button>
+    </form>
+    <div class="pop-up__exit-button"></div>
+  </div>
+</article>
 <template id="card_template">
   <li class="card">
     <img src="" alt="" class="card__image">
     <h2 class="card__title"></h2>
-    <button class="card__like-button"></button>
+    <button class="card__like-button" type="button"></button>
   </li>
 </template>
 <script src="scripts/script.js"></script>

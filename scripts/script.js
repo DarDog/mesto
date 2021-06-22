@@ -85,6 +85,10 @@ const getCard = (title, src) => {
   cardClone.querySelector('.card__image').src = src;
   cardClone.querySelector('.card__image').alt = title;
 
+  cardClone.querySelector('.card__like-button').addEventListener('click', (evt) => {
+    evt.target.classList.toggle('card__like-button_active');
+  })
+
   cardsPlace.prepend(cardClone)
 }
 

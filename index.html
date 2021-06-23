@@ -34,8 +34,8 @@
   <div class="pop-up__background">
     <h2 class="pop-up__title">Редактировать профиль</h2>
     <form class="pop-up__container" name="editForm">
-      <input type="text" class="pop-up__input" placeholder="Введите ваше имя" name="profileName">
-      <input type="text" class="pop-up__input" placeholder="Расскажите о себе" name="profileDescription">
+      <input type="text" class="pop-up__input" placeholder="Введите ваше имя" name="profileName" required>
+      <input type="text" class="pop-up__input" placeholder="Расскажите о себе" name="profileDescription" required>
       <button type="submit" class="pop-up__submit-button" name="submitButton">Сохранить</button>
     </form>
     <div class="pop-up__exit-button"></div>
@@ -45,8 +45,8 @@
   <div class="pop-up__background">
     <h2 class="pop-up__title">Новое место</h2>
     <form class="pop-up__container" name="addForm">
-      <input type="text" class="pop-up__input" placeholder="Название" name="cardName">
-      <input type="text" class="pop-up__input" placeholder="Ссылка на картинку" name="cardLink">
+      <input type="text" class="pop-up__input" placeholder="Название" name="cardName" required>
+      <input type="url" class="pop-up__input" placeholder="Ссылка на картинку" name="cardLink" required>
       <button type="submit" class="pop-up__submit-button" name="submitButton">Создать</button>
     </form>
     <div class="pop-up__exit-button"></div>

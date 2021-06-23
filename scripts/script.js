@@ -13,6 +13,7 @@ const popUps = document.querySelectorAll('.pop-up'),
     cardSrcInput = addFormElement.querySelector('[name=cardLink]'),
     profileName = document.querySelector('.profile__title'),
     profileDescription = document.querySelector('.profile__subtitle'),
+    cardsContainer = document.querySelector('.elements__cards'),
     usersCards = [
       {
         title: 'Сахалин Холмск',
@@ -45,18 +46,9 @@ const fillInputs = () => {
   descriptionInput.value = profileDescription.textContent;
 }
 
-const openEditPopUp = () => {
-  editPopUp.classList.add('pop-up_opened');
-
+const openPopUp = (popUp) => {
+  popUp.classList.add('pop-up_opened');
   fillInputs();
-}
-
-const openAddPopUp = () => {
-  addPopUp.classList.add('pop-up_opened');
-}
-
-const openImagePopUp = () => {
-  imagePopUp.classList.add('pop-up_opened');
 }
 
 const closePopUp = () => {
@@ -72,21 +64,16 @@ const editFormSubmitHandler = (evt) => {
   closePopUp();
 }
 
-const addFormSubmitHandler = (evt) => {
-  evt.preventDefault();
-  getCard(cardNameInput.value, cardSrcInput.value);
-  closePopUp();
-}
-
-const getCard = (title, src) => {
+const createCard = (title, src) => {
   const cardTemplate = document.querySelector('#card_template').content,
-      cardsPlace = document.querySelector('.elements__cards'),
       cardClone = cardTemplate.cloneNode(true),
-      deleteButton = cardClone.querySelector('.card__delete-button')
+      cardImage = cardClone.querySelector('.card__image'),
+      cardTitle = cardClone.querySelector('.card__title'),
+      deleteButton = cardClone.querySelector('.card__delete-button');
 
-  cardClone.querySelector('.card__title').textContent = title;
-  cardClone.querySelector('.card__image').src = src;
-  cardClone.querySelector('.card__image').alt = title;
+  cardTitle.textContent = title;
+  cardImage.src = src;
+  cardImage.alt = title;
 
   cardClone.querySelector('.card__like-button').addEventListener('click', (evt) => {
     evt.target.classList.toggle('card__like-button_active');
@@ -97,30 +84,43 @@ const getCard = (title, src) => {
     cardsElement.remove();
   });
 
-  cardClone.querySelector('.card__image').addEventListener('click', (evt) => {
-    openImagePopUp();
-    const evtTarget = evt.target;
-    imagePopUp.querySelector('.pop-up__image').src = evtTarget.src;
-    imagePopUp.querySelector('.pop-up__image').alt = evtTarget.alt;
-    imagePopUp.querySelector('.pop-up__image-title').textContent = evtTarget.alt;
-  });
+  cardImage.addEventListener('click', () => {
+    openPopUp(imagePopUp);
+    const popUpsContentImage = imagePopUp.querySelector('.pop-up__image');
+    popUpsContentImage.src = src;
+    popUpsContentImage.alt = title;
+    imagePopUp.querySelector('.pop-up__image-title').textContent = title;
+  })
 
-  cardsPlace.prepend(cardClone)
+  return cardClone;
+}
+
+const addCard = (container, cardElement) => {
+  container.prepend(cardElement);
 }
 
 const getUsersCards = (usersCards) => {
   usersCards.forEach((item) => {
-    return getCard(item.title, item.src)
+    return addCard(cardsContainer, createCard(item.title, item.src));
   });
 }
 
 getUsersCards(usersCards);
 
-editButton.addEventListener('click', openEditPopUp);
-addButton.addEventListener('click', openAddPopUp);
+editButton.addEventListener("click", () => {
+  openPopUp(editPopUp);
+});
+addButton.addEventListener('click', () => {
+  openPopUp(addPopUp);
+});
 closeButtons.forEach((item) => {
   item.addEventListener('click', closePopUp);
 });
 
 editFormElement.addEventListener('submit', editFormSubmitHandler);
-addFormElement.addEventListener('submit', addFormSubmitHandler);
+addFormElement.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  addCard(cardsContainer, createCard(cardNameInput.value, cardSrcInput.value));
+  addFormElement.reset()
+  closePopUp();
+});

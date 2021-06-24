@@ -48,7 +48,6 @@ const fillInputs = () => {
 
 const openPopUp = (popUp) => {
   popUp.classList.add('pop-up_opened');
-  fillInputs();
 }
 
 const closePopUp = () => {
@@ -108,6 +107,7 @@ const getUsersCards = (usersCards) => {
 getUsersCards(usersCards);
 
 editButton.addEventListener("click", () => {
+  fillInputs();
   openPopUp(editPopUp);
 });
 addButton.addEventListener('click', () => {

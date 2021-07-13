@@ -33,18 +33,18 @@
 <article class="pop-up pop-up_content_edit">
   <div class="pop-up__background">
     <h2 class="pop-up__title">Редактировать профиль</h2>
-    <form class="form" name="editForm">
-      <label class="form__field">
+    <form novalidate class="form" name="editForm">
+      <label for="name-input" class="form__field">
         <input type="text" class="form__input" placeholder="Введите ваше имя" name="profileName" id="name-input"
-               required>
+               required minlength="2" maxlength="40">
         <span class="form__input-error name-input-error"></span>
       </label>
-      <label class="form__field">
+      <label for="description-input" class="form__field">
         <input type="text" class="form__input" placeholder="Расскажите о себе" name="profileDescription"
-               id="description-input" required>
+               id="description-input" required minlength="2" maxlength="200">
         <span class="form__input-error description-input-error"></span>
       </label>
-      <button type="submit" class="pop-up__submit-button" name="submitButton">Сохранить</button>
+      <button type="submit" class="form__submit-button" name="submitButton">Сохранить</button>
     </form>
     <div class="pop-up__exit-button"></div>
   </div>
@@ -52,14 +52,18 @@
 <article class="pop-up pop-up_content_add">
   <div class="pop-up__background">
     <h2 class="pop-up__title">Новое место</h2>
-    <form class="form" name="addForm">
-      <label class="form__field">
-        <input type="text" class="form__input" placeholder="Название" name="cardName" required>
+    <form novalidate class="form" name="addForm">
+      <label for="card-name-input" class="form__field">
+        <input type="text" class="form__input" placeholder="Название" name="cardName" id="card-name-input" required
+               minlength="2" maxlength="30">
+        <span class="form__input-error card-name-input-error"></span>
       </label>
-      <label class="form__field">
-        <input type="url" class="form__input" placeholder="Ссылка на картинку" name="cardLink" required>
+      <label for="card-link-input" class="form__field">
+        <input type="url" class="form__input" placeholder="Ссылка на картинку" name="cardLink" id="card-link-input"
+               required>
+        <span class="form__input-error card-link-input-error"></span>
       </label>
-      <button type="submit" class="pop-up__submit-button" name="submitButton">Создать</button>
+      <button type="submit" class="form__submit-button" name="submitButton">Создать</button>
     </form>
     <div class="pop-up__exit-button"></div>
   </div>
@@ -80,5 +84,6 @@
   </li>
 </template>
 <script src="scripts/script.js"></script>
+<script src="scripts/validation.js"></script>
 </body>
 </html>

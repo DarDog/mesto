@@ -3,4 +3,6 @@
   font-size: 12px;
   line-height: 1.25;
   color: #ff0000;
+  display: none;
+  max-width: 350px;
 }

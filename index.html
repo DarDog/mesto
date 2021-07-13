@@ -33,9 +33,17 @@
 <article class="pop-up pop-up_content_edit">
   <div class="pop-up__background">
     <h2 class="pop-up__title">Редактировать профиль</h2>
-    <form class="pop-up__container" name="editForm">
-      <input type="text" class="pop-up__input" placeholder="Введите ваше имя" name="profileName" required>
-      <input type="text" class="pop-up__input" placeholder="Расскажите о себе" name="profileDescription" required>
+    <form class="form" name="editForm">
+      <label class="form__field">
+        <input type="text" class="form__input" placeholder="Введите ваше имя" name="profileName" id="name-input"
+               required>
+        <span class="form__input-error name-input-error"></span>
+      </label>
+      <label class="form__field">
+        <input type="text" class="form__input" placeholder="Расскажите о себе" name="profileDescription"
+               id="description-input" required>
+        <span class="form__input-error description-input-error"></span>
+      </label>
       <button type="submit" class="pop-up__submit-button" name="submitButton">Сохранить</button>
     </form>
     <div class="pop-up__exit-button"></div>
@@ -44,9 +52,13 @@
 <article class="pop-up pop-up_content_add">
   <div class="pop-up__background">
     <h2 class="pop-up__title">Новое место</h2>
-    <form class="pop-up__container" name="addForm">
-      <input type="text" class="pop-up__input" placeholder="Название" name="cardName" required>
-      <input type="url" class="pop-up__input" placeholder="Ссылка на картинку" name="cardLink" required>
+    <form class="form" name="addForm">
+      <label class="form__field">
+        <input type="text" class="form__input" placeholder="Название" name="cardName" required>
+      </label>
+      <label class="form__field">
+        <input type="url" class="form__input" placeholder="Ссылка на картинку" name="cardLink" required>
+      </label>
       <button type="submit" class="pop-up__submit-button" name="submitButton">Создать</button>
     </form>
     <div class="pop-up__exit-button"></div>

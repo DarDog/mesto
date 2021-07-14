@@ -1,10 +1,8 @@
-const popUps = document.querySelectorAll('.pop-up'),
-    editPopUp = document.querySelector('.pop-up_content_edit'),
+const editPopUp = document.querySelector('.pop-up_content_edit'),
     addPopUp = document.querySelector('.pop-up_content_add'),
     imagePopUp = document.querySelector('.pop-up_content_image'),
     editFormElement = document.querySelector('[name=editForm]'),
     addFormElement = document.querySelector('[name=addForm]'),
-    closeButtons = document.querySelectorAll('.pop-up__exit-button'),
     editButton = document.querySelector('.profile__edit-button'),
     addButton = document.querySelector('.profile__add-button'),
     nameInput = editFormElement.querySelector('[name=profileName]'),
@@ -48,12 +46,43 @@ const fillInputs = () => {
 
 const openPopUp = (popUp) => {
   popUp.classList.add('pop-up_opened');
+
+  document.addEventListener('keydown', closePopUpBuClickAtEsc);
+  popUp.addEventListener('click', closePopUpByClickAtOverlay);
+  popUp.addEventListener('click', closePopUpByClickAtCloseButton);
 }
 
-const closePopUp = () => {
-  popUps.forEach((item) => {
-    item.classList.remove('pop-up_opened');
-  })
+const closePopUp = (popUp) => {
+  popUp.classList.remove('pop-up_opened');
+
+  document.removeEventListener('keydown', closePopUpBuClickAtEsc);
+  popUp.removeEventListener('click', closePopUpByClickAtOverlay);
+  popUp.removeEventListener('click', closePopUpByClickAtCloseButton);
+}
+
+const closePopUpByClickAtCloseButton = (evt) => {
+  const popUp = evt.currentTarget,
+      closeButton = evt.target;
+
+  if (closeButton.classList.contains('pop-up__exit-button')) {
+    closePopUp(popUp)
+  }
+}
+
+const closePopUpByClickAtOverlay = (evt) => {
+  const isOverlay = evt.target.classList.contains('pop-up'),
+      popUp = evt.target;
+  if (isOverlay) {
+    closePopUp(popUp);
+  }
+}
+
+const closePopUpBuClickAtEsc = (evt) => {
+  const popUp = document.querySelector('.pop-up_opened')
+
+  if (evt.key === 'Escape') {
+    closePopUp(popUp);
+  }
 }
 
 const editFormSubmitHandler = (evt) => {
@@ -113,11 +142,9 @@ editButton.addEventListener("click", () => {
 addButton.addEventListener('click', () => {
   openPopUp(addPopUp);
 });
-closeButtons.forEach((item) => {
-  item.addEventListener('click', closePopUp);
-});
 
 editFormElement.addEventListener('submit', editFormSubmitHandler);
+
 addFormElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
   addCard(cardsContainer, createCard(cardNameInput.value, cardSrcInput.value));

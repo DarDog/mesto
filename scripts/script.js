@@ -128,9 +128,11 @@ const editFormSubmitHandler = (evt) => {
 }
 
 const addFormSubmitHandler = (evt) => {
+  const createButton = popUpTypeAdd.querySelector('.form__submit-button')
   evt.preventDefault();
   addCard(cardsContainer, createCard(cardNameInput.value, cardSrcInput.value));
   addFormElement.reset()
+  createButton.classList.add('form__submit-button_disable')
   closePopUp(popUpTypeAdd);
 }
 /**/
@@ -161,9 +163,9 @@ const getPreparedCards = (preparedCards) => {
 /**/
 
 getPreparedCards(preparedCards);
+fillInputs();
 
 editButton.addEventListener("click", () => {
-  fillInputs();
   openPopUp(popUpTypeEdit);
 });
 addButton.addEventListener('click', () => {

@@ -1,4 +1,4 @@
-import {openPopUp, popUpTypeImage} from "./index.js";
+import {openPopUp, popUpTypeImage, popUpTypeImageContentImage, popUpTypeImageContentTitle} from "./index.js";
 
 export class Card {
   constructor(data, template) {
@@ -26,11 +26,8 @@ export class Card {
   _openImagePopup() {
       openPopUp(popUpTypeImage);
 
-      const popUpsContentImage = popUpTypeImage.querySelector('.pop-up__image'),
-          popUpsContentTitle = popUpTypeImage.querySelector('.pop-up__image-title')
-
-      popUpsContentImage.src = this._link;
-      popUpsContentTitle.textContent = this._name
+    popUpTypeImageContentImage.src = this._link;
+    popUpTypeImageContentTitle.textContent = this._name
   }
 
   _setEventListeners() {
@@ -50,6 +47,7 @@ export class Card {
     this._setEventListeners();
 
     this._element.querySelector('.card__image').src = this._link;
+    this._element.querySelector('.card__image').alt = this._name;
     this._element.querySelector('.card__title').textContent = this._name;
 
     return this._element

@@ -1,7 +1,9 @@
 import {Card} from "./Card.js";
 import {FormValidator} from "./FormValidator.js";
 
-export const popUpTypeImage = document.querySelector('.pop-up_content_image');
+export const popUpTypeImage = document.querySelector('.pop-up_content_image'),
+    popUpTypeImageContentImage = popUpTypeImage.querySelector('.pop-up__image'),
+    popUpTypeImageContentTitle = popUpTypeImage.querySelector('.pop-up__image-title');
 
 const popUpTypeEdit = document.querySelector('.pop-up_content_edit'),
     popUpTypeAdd = document.querySelector('.pop-up_content_add'),

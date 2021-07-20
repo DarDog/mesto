@@ -14,33 +14,7 @@ const popUpTypeEdit = document.querySelector('.pop-up_content_edit'),
     cardSrcInput = addFormElement.querySelector('[name=cardLink]'),
     profileName = document.querySelector('.profile__title'),
     profileDescription = document.querySelector('.profile__subtitle'),
-    cardsContainer = document.querySelector('.elements__cards'),
-    preparedCards = [
-      {
-        title: 'Сахалин Холмск',
-        src: 'images/kholmskoe-vodohranilishe.jpg'
-      },
-      {
-        title: 'Япония',
-        src: 'images/japan.jpg'
-      },
-      {
-        title: 'Италия',
-        src: 'images/italy.jpg'
-      },
-      {
-        title: 'Франция',
-        src: 'images/Franch.jpg'
-      },
-      {
-        title: 'Сахалин Чертов мост',
-        src: 'images/chertov-most.jpg'
-      },
-      {
-        title: 'Замок Burg Eltz',
-        src: 'images/Burg%20Eltz.jpg'
-      },
-    ];
+    cardsContainer = document.querySelector('.elements__cards');
 
 const fillInputs = () => {
   nameInput.value = profileName.textContent;
@@ -134,15 +108,7 @@ const createCard = (name, link) => {
 const addCard = (container, cardElement) => {
   container.prepend(cardElement);
 }
-
-const getPreparedCards = (preparedCards) => {
-  preparedCards.forEach((item) => {
-    return addCard(cardsContainer, createCard(item.title, item.src));
-  });
-}
 /**/
-
-getPreparedCards(preparedCards);
 fillInputs();
 
 editButton.addEventListener("click", () => {

@@ -1,4 +1,6 @@
-class Card {
+import {openPopUp, popUpTypeImage} from "./index.js";
+
+export class Card {
   constructor(data, template) {
     this._name = data.title;
     this._link = data.src;
@@ -53,37 +55,3 @@ class Card {
     return this._element
   }
 }
-
-const preparedCards = [
-  {
-    title: 'Сахалин Холмск',
-    src: 'images/kholmskoe-vodohranilishe.jpg'
-  },
-  {
-    title: 'Япония',
-    src: 'images/japan.jpg'
-  },
-  {
-    title: 'Италия',
-    src: 'images/italy.jpg'
-  },
-  {
-    title: 'Франция',
-    src: 'images/Franch.jpg'
-  },
-  {
-    title: 'Сахалин Чертов мост',
-    src: 'images/chertov-most.jpg'
-  },
-  {
-    title: 'Замок Burg Eltz',
-    src: 'images/Burg%20Eltz.jpg'
-  },
-];
-
-preparedCards.forEach((el) => {
-  const card = new Card(el, '#card_template'),
-      cardElement = card.generateCard();
-
-  document.querySelector('.elements__cards').append(cardElement);
-})

@@ -57,25 +57,26 @@ const formElementClasses = {
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active'
 };
-//Массив форм
-const formList = Array.from(document.querySelectorAll('.form'));
 
 //Валидация форм
-formList.forEach((formElement) => {
-  const formValidator = new FormValidator(formElementClasses, formElement);
-  formValidator.enableValidation();
-});
+const editFormElementValidator = new FormValidator(formElementClasses, editFormElement);
+editFormElementValidator.enableValidation();
 
-const addCard = (data, template, place) => {
-  const card = new Card(data, template),
-      cardElement = card.generateCard();
+const addFormElementValidator = new FormValidator(formElementClasses, addFormElement);
+addFormElementValidator.enableValidation();
 
-  place.prepend(cardElement)
+const createCard = (data, template) => {
+  const card = new Card(data, template);
+  return card.generateCard()
+}
+
+const addCardPrepend = (cardPlace, cardElement) => {
+  cardPlace.prepend(cardElement)
 }
 
 //Создание подготовленных карточек
 preparedCards.forEach((el) => {
-  addCard(el, '#card_template', cardsContainer)
+  addCardPrepend(cardsContainer, createCard(el, '#card_template'))
 });
 
 const fillInputs = () => {
@@ -107,9 +108,8 @@ const closePopUpByClickAtOverlay = (evt) => {
 }
 
 const closePopUpByClickAtEsc = (evt) => {
-  const popUp = document.querySelector('.pop-up_opened')
-
   if (evt.key === 'Escape') {
+    const popUp = document.querySelector('.pop-up_opened')
     closePopUp(popUp);
   }
 }
@@ -124,15 +124,14 @@ const editFormSubmitHandler = (evt) => {
 }
 
 const addFormSubmitHandler = (evt) => {
-  const createButton = popUpTypeAdd.querySelector('.form__submit-button'),
-      cardData = {
+  const cardData = {
         title: cardNameInput.value,
         src: cardSrcInput.value
       }
   evt.preventDefault();
-  addCard(cardData, '#card_template', cardsContainer);
-  addFormElement.reset()
-  createButton.classList.add('form__submit-button_disable')
+  addCardPrepend(cardsContainer, createCard(cardData, '#card_template'))
+  addFormElement.reset();
+  addFormElementValidator.toggleButtonState();
   closePopUp(popUpTypeAdd);
 }
 /**/
@@ -140,6 +139,7 @@ fillInputs();
 
 editButton.addEventListener("click", () => {
   openPopUp(popUpTypeEdit);
+  editFormElementValidator.toggleButtonState()
 });
 addButton.addEventListener('click', () => {
   openPopUp(popUpTypeAdd);

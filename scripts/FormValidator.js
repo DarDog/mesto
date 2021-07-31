@@ -1,4 +1,7 @@
 export class FormValidator {
+  /*  Класс валидатор формы
+  * конструктор принимает объект с селекторами элементов формы
+  * и форму в которой происходит валидация*/
   constructor(data, form) {
     this._formElement = form;
     this._inputSelector = data.inputSelector;
@@ -10,7 +13,7 @@ export class FormValidator {
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
-  _showInputElement(inputElement) {
+  _showInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
 
     inputElement.classList.add(this._inputErrorClass);
@@ -18,7 +21,7 @@ export class FormValidator {
     errorElement.classList.add(this._errorClass);
   }
 
-  _hideInputElement(inputElement) {
+  _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
 
     inputElement.classList.remove(this._inputErrorClass);
@@ -28,9 +31,9 @@ export class FormValidator {
 
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputElement(inputElement);
+      this._showInputError(inputElement);
     } else {
-      this._hideInputElement(inputElement)
+      this._hideInputError(inputElement)
     }
   }
 

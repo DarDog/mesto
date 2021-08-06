@@ -1,6 +1,6 @@
 /*Основные стили*/
-@import url('../../vendor/normalize.css');
-@import url('../../vendor/fonts.css');
+@import url('../vendor/normalize.css');
+@import url('../vendor/fonts.css');
 @import url('../blocks/page/page.css');
 /*Блок header*/
 @import url('../blocks/header/header.css');

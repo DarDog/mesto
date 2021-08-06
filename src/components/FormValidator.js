@@ -1,7 +1,4 @@
-export class FormValidator {
-  /*  Класс валидатор формы
-  * конструктор принимает объект с селекторами элементов формы
-  * и форму в которой происходит валидация*/
+export default class FormValidator {
   constructor(data, form) {
     this._formElement = form;
     this._inputSelector = data.inputSelector;

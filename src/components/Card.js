@@ -1,9 +1,7 @@
-import {openPopUp, popUpTypeImage, popUpTypeImageContentImage, popUpTypeImageContentTitle} from "../index";
+import { popUpTypeImage, popUpTypeImageContentImage, popUpTypeImageContentTitle } from '../utils/constants.js';
+import { openPopUp } from '../index.js'
 
-export class Card {
-  /*  Класс Карточки возвращает элемент карточки
-  конструктор принимает объект с данными получаемыми от пользователя
-  и html шаблон карточки */
+export default class Card {
   constructor(data, template) {
     this._name = data.title;
     this._link = data.src;

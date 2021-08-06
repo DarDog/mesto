@@ -1,7 +1,8 @@
 import './pages/index.css'
 
-import {Card} from "./scripts/Card.js";
-import {FormValidator} from "./scripts/FormValidator.js";
+import {Card} from "./components/Card.js";
+import {FormValidator} from "./components/FormValidator.js";
+import Section from "./components/Section.js";
 
 export const popUpTypeImage = document.querySelector('.pop-up_content_image'),
     popUpTypeImageContentImage = popUpTypeImage.querySelector('.pop-up__image'),
@@ -22,7 +23,9 @@ const popUpTypeEdit = document.querySelector('.pop-up_content_edit'),
     cardSrcInput = addFormElement.querySelector('[name=cardLink]'),
     profileName = document.querySelector('.profile__title'),
     profileDescription = document.querySelector('.profile__subtitle'),
-    cardsContainer = document.querySelector('.elements__cards');
+    cardsContainer = document.querySelector('.elements__cards'),
+    cardsContainerSelector = '.elements__cards',
+    cardTemplateSelector = '.card-template';
 
 // Пути к изображениям для webpack
 const sakhalinKholmsk = new URL('./images/kholmskoe-vodohranilishe.jpg', import.meta.url),
@@ -74,19 +77,16 @@ editFormElementValidator.enableValidation();
 const addFormElementValidator = new FormValidator(formElementClasses, addFormElement);
 addFormElementValidator.enableValidation();
 
-const createCard = (data, template) => {
-  const card = new Card(data, template);
-  return card.generateCard()
-}
+const prependCardsAdd = new Section({
+  items: preparedCards,
+  renderer: (item) => {
+    const card = new Card(item, cardTemplateSelector);
+    const cardElement = card.generateCard();
+    prependCardsAdd.addItem(cardElement);
+  }
+}, cardsContainerSelector);
 
-const addCardPrepend = (cardPlace, cardElement) => {
-  cardPlace.prepend(cardElement)
-}
-
-//Создание подготовленных карточек
-preparedCards.forEach((el) => {
-  addCardPrepend(cardsContainer, createCard(el, '#card_template'))
-});
+prependCardsAdd.renderItems();
 
 const fillInputs = () => {
   nameInput.value = profileName.textContent;

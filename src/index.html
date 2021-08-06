@@ -13,7 +13,7 @@
 </header>
 <main class="main page__main">
   <section class="profile main__profile">
-    <img src="<%=require('../images/avatar.jpg')%>" alt="аватар пользователя" class="profile__avatar">
+    <img src="<%=require('./images/avatar.jpg')%>" alt="аватар пользователя" class="profile__avatar">
     <div class="profile__info">
       <h1 class="profile__title">Жак-Ив Кусто</h1>
       <button type="button" class="profile__edit-button"></button>
@@ -74,7 +74,7 @@
     <button type="button" class="pop-up__exit-button pop-up__exit-button_place_image-pop-up"></button>
   </div>
 </article>
-<template id="card_template">
+<template class="card-template" id="card_template">
   <li class="card">
     <img src="/" alt="тут будет 'alt' добавляемой картинки" class="card__image">
     <h2 class="card__title"></h2>

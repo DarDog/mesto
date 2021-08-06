@@ -1,4 +1,4 @@
-import {openPopUp, popUpTypeImage, popUpTypeImageContentImage, popUpTypeImageContentTitle} from "./index.js";
+import {openPopUp, popUpTypeImage, popUpTypeImageContentImage, popUpTypeImageContentTitle} from "../index";
 
 export class Card {
   /*  Класс Карточки возвращает элемент карточки

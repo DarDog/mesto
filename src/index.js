@@ -1,5 +1,7 @@
-import {Card} from "./Card.js";
-import {FormValidator} from "./FormValidator.js";
+import './pages/index.css'
+
+import {Card} from "./scripts/Card.js";
+import {FormValidator} from "./scripts/FormValidator.js";
 
 export const popUpTypeImage = document.querySelector('.pop-up_content_image'),
     popUpTypeImageContentImage = popUpTypeImage.querySelector('.pop-up__image'),
@@ -22,34 +24,41 @@ const popUpTypeEdit = document.querySelector('.pop-up_content_edit'),
     profileDescription = document.querySelector('.profile__subtitle'),
     cardsContainer = document.querySelector('.elements__cards');
 
-//Подготовленные данные
+// Пути к изображениям для webpack
+const sakhalinKholmsk = new URL('./images/kholmskoe-vodohranilishe.jpg', import.meta.url),
+    japan = new URL('./images/japan.jpg', import.meta.url),
+    italy = new URL('./images/italy.jpg', import.meta.url),
+    franch = new URL('./images/Franch.jpg', import.meta.url),
+    sakhalinChertovMost = new URL('./images/chertov-most.jpg', import.meta.url),
+    castleBurgEltz = new URL('./images/Burg Eltz.jpg', import.meta.url);
+
 const preparedCards = [
   {
     title: 'Сахалин Холмск',
-    src: 'images/kholmskoe-vodohranilishe.jpg'
+    src: sakhalinKholmsk
   },
   {
     title: 'Япония',
-    src: 'images/japan.jpg'
+    src: japan
   },
   {
     title: 'Италия',
-    src: 'images/italy.jpg'
+    src: italy
   },
   {
     title: 'Франция',
-    src: 'images/Franch.jpg'
+    src: franch
   },
   {
     title: 'Сахалин Чертов мост',
-    src: 'images/chertov-most.jpg'
+    src: sakhalinChertovMost
   },
   {
     title: 'Замок Burg Eltz',
-    src: 'images/Burg%20Eltz.jpg'
+    src: castleBurgEltz
   },
 ];
-//Селекторы формы
+
 const formElementClasses = {
   inputSelector: '.form__input',
   submitButtonSelector: '.form__submit-button',
@@ -58,7 +67,7 @@ const formElementClasses = {
   errorClass: 'form__input-error_active'
 };
 
-//Валидация форм
+
 const editFormElementValidator = new FormValidator(formElementClasses, editFormElement);
 editFormElementValidator.enableValidation();
 
@@ -98,7 +107,7 @@ const closePopUp = (popUp) => {
   popUp.removeEventListener('click', closePopUpByClickAtOverlay);
 }
 
-/*Методы закрытия попапов*/
+
 const closePopUpByClickAtOverlay = (evt) => {
   const isOverlay = evt.target.classList.contains('pop-up'),
       popUp = evt.target;
@@ -113,9 +122,7 @@ const closePopUpByClickAtEsc = (evt) => {
     closePopUp(popUp);
   }
 }
-/**/
 
-/*Функции отправки форм*/
 const editFormSubmitHandler = (evt) => {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -134,7 +141,7 @@ const addFormSubmitHandler = (evt) => {
   addFormElementValidator.toggleButtonState();
   closePopUp(popUpTypeAdd);
 }
-/**/
+
 fillInputs();
 
 editButton.addEventListener("click", () => {

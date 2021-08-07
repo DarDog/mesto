@@ -1,7 +1,6 @@
 export const popUpTypeImageSelector = '.pop-up_content_image',
     popUpTypeEditSelector = '.pop-up_content_edit',
     popUpTypeAddSelector = '.pop-up_content_add',
-    popUpTypeEdit = document.querySelector('.pop-up_content_edit'),
     editFormElement = document.querySelector('[name=editForm]'),
     addFormElement = document.querySelector('[name=addForm]'),
     editButton = document.querySelector('.profile__edit-button'),

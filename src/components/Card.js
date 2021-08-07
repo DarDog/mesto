@@ -1,12 +1,25 @@
-import { popUpTypeImage, popUpTypeImageContentImage, popUpTypeImageContentTitle } from '../utils/constants.js';
-import { openPopUp } from '../index.js'
-
 export default class Card {
-  constructor(data, template) {
-    this._name = data.title;
-    this._link = data.src;
+  constructor(handleCardClick, data, template) {
+    this._name = data.cardName;
+    this._link = data.cardLink;
     this._template = template;
+    this._handleCardClick = handleCardClick;
   }
+
+
+  generateCard() {
+    this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector('.card__image');
+    this._setEventListeners();
+    const cardTitle = this._element.querySelector('.card__title');
+
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    cardTitle.textContent = this._name;
+
+    return this._element
+  }
+
 
   _getTemplate() {
     return document
@@ -24,13 +37,6 @@ export default class Card {
     this._element.remove();
   }
 
-  _openImagePopup() {
-      openPopUp(popUpTypeImage);
-
-    popUpTypeImageContentImage.src = this._link;
-    popUpTypeImageContentTitle.textContent = this._name
-  }
-
   _setEventListeners() {
     this._element.querySelector('.card__like-button').addEventListener('click', () => {
       this._changeStateLikeButton();
@@ -38,21 +44,11 @@ export default class Card {
     this._element.querySelector('.card__delete-button').addEventListener('click', () => {
       this._deleteCard();
     });
-    this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._openImagePopup();
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick({
+        link: this._link,
+        name: this._name
+      });
     });
-  }
-
-  generateCard() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-    const cardImage = this._element.querySelector('.card__image'),
-        cardTitle = this._element.querySelector('.card__title');
-
-    cardImage.src = this._link;
-    cardImage.alt = this._name;
-    cardTitle.textContent = this._name;
-
-    return this._element
   }
 }

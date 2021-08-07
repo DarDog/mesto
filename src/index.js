@@ -1,27 +1,28 @@
 import './pages/index.css'
 
-import { formElementClasses,
-  editFormElement,
-  addFormElement,
-  cardTemplateSelector,
-  cardsContainerSelector,
-  nameInput,
-  profileName,
-  descriptionInput,
-  profileDescription,
-  popUpTypeEdit,
-  cardNameInput,
-  cardSrcInput,
-  popUpTypeAdd,
-  editButton,
+import {
   addButton,
-  closeButtonEditPopUp,
-  closeButtonAddPopUp,
-  closeButtonImagePopUp,
-  popUpTypeImage} from './utils/constants.js'
+  addFormElement,
+  cardsContainerSelector,
+  cardTemplateSelector,
+  descriptionInput,
+  editButton,
+  editFormElement,
+  formElementClasses,
+  nameInput,
+  popUpTypeEdit,
+  popUpTypeEditSelector,
+  popUpTypeImageSelector,
+  profileDescription,
+  profileName,
+  popUpTypeAddSelector
+} from './utils/constants.js'
 import Card from './components/Card.js';
 import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
+import PopupWithImage from "./components/PopupWithImage.js";
+import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js'
 
 // Пути к изображениям для webpack
 const sakhalinKholmsk = new URL('./images/kholmskoe-vodohranilishe.jpg', import.meta.url),
@@ -33,28 +34,28 @@ const sakhalinKholmsk = new URL('./images/kholmskoe-vodohranilishe.jpg', import.
 
 export const preparedCards = [
   {
-    title: 'Сахалин Холмск',
-    src: sakhalinKholmsk
+    cardName: 'Сахалин Холмск',
+    cardLink: sakhalinKholmsk
   },
   {
-    title: 'Япония',
-    src: japan
+    cardName: 'Япония',
+    cardLink: japan
   },
   {
-    title: 'Италия',
-    src: italy
+    cardName: 'Италия',
+    cardLink: italy
   },
   {
-    title: 'Франция',
-    src: franch
+    cardName: 'Франция',
+    cardLink: franch
   },
   {
-    title: 'Сахалин Чертов мост',
-    src: sakhalinChertovMost
+    cardName: 'Сахалин Чертов мост',
+    cardLink: sakhalinChertovMost
   },
   {
-    title: 'Замок Burg Eltz',
-    src: castleBurgEltz
+    cardName: 'Замок Burg Eltz',
+    cardLink: castleBurgEltz
   },
 ];
 
@@ -64,10 +65,15 @@ editFormElementValidator.enableValidation();
 const addFormElementValidator = new FormValidator(formElementClasses, addFormElement);
 addFormElementValidator.enableValidation();
 
+const handleCardClick = (data) => {
+  const popupWithImage = new PopupWithImage(popUpTypeImageSelector);
+  popupWithImage.open(data)
+}
+
 const prependCardsAdd = new Section({
   items: preparedCards,
   renderer: (item) => {
-    const card = new Card(item, cardTemplateSelector);
+    const card = new Card(handleCardClick, item, cardTemplateSelector);
     const cardElement = card.generateCard();
     prependCardsAdd.addItem(cardElement);
   }
@@ -75,12 +81,12 @@ const prependCardsAdd = new Section({
 
 prependCardsAdd.renderItems();
 
-const fillInputs = () => {
-  nameInput.value = profileName.textContent;
-  descriptionInput.value = profileDescription.textContent;
+const fillInputs = (userInfo) => {
+  nameInput.value = userInfo.name;
+  descriptionInput.value = userInfo.description;
 }
 
-export  const openPopUp = (popUp) => {
+export const openPopUp = (popUp) => {
   popUp.classList.add('pop-up_opened');
 
   document.addEventListener('keydown', closePopUpByClickAtEsc);
@@ -111,51 +117,45 @@ const closePopUpByClickAtEsc = (evt) => {
 }
 
 const editFormSubmitHandler = (evt) => {
-  evt.preventDefault();
+  popupWithEditForm.open()
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
   closePopUp(popUpTypeEdit);
 }
 
-const addFormSubmitHandler = (evt) => {
-  const cardData = [{
-        title: cardNameInput.value,
-        src: cardSrcInput.value
-      }]
-  evt.preventDefault();
-  const cardsAdd = new Section({
-    items: cardData,
-    renderer: (item) => {
-      const card = new Card(item, cardTemplateSelector);
-      const cardElement = card.generateCard();
-      cardsAdd.addItem(cardElement);
-    }
-  }, cardsContainerSelector);
-  cardsAdd.renderItems()
-  addFormElement.reset();
-  addFormElementValidator.toggleButtonState();
-  closePopUp(popUpTypeAdd);
+const addFormSubmitHandler = () => {
+  popupWithAddForm.open()
 }
 
-fillInputs();
+const popupWithAddForm = new PopupWithForm({
+  popupSelector: popUpTypeAddSelector,
+  formSubmit: (data) => {
+    const card = new Card(handleCardClick, data, cardTemplateSelector);
+    const cardElement = card.generateCard();
+    prependCardsAdd.addItem(cardElement);
+  }
+});
+
+
+
+const userInfo = new UserInfo({
+  name:profileName.textContent,
+  description:profileDescription.textContent});
+
+const popupWithEditForm = new PopupWithForm({
+  popupSelector: popUpTypeEditSelector,
+  formSubmit: (data) => {
+    userInfo.setUserInfo(data)
+  }
+})
 
 editButton.addEventListener("click", () => {
-  openPopUp(popUpTypeEdit);
-  editFormElementValidator.toggleButtonState()
+  popupWithEditForm.open();
+  fillInputs(userInfo.getUserInfo())
 });
 addButton.addEventListener('click', () => {
-  openPopUp(popUpTypeAdd);
+  popupWithAddForm.open();
 });
 
-closeButtonEditPopUp.addEventListener('click', () => {
-  closePopUp(popUpTypeEdit)
-})
-closeButtonAddPopUp.addEventListener('click', () => {
-  closePopUp(popUpTypeAdd)
-})
-closeButtonImagePopUp.addEventListener('click', () => {
-  closePopUp(popUpTypeImage)
-})
-
 editFormElement.addEventListener('submit', editFormSubmitHandler);
-addFormElement.addEventListener('submit',addFormSubmitHandler);
+addFormElement.addEventListener('submit', addFormSubmitHandler);

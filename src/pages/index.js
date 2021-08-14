@@ -62,9 +62,14 @@ export const preparedCards = [
 
 
 const handleCardClick = (data) => {
-  const popupWithImage = new PopupWithImage(popUpTypeImageSelector);
   popupWithImage.open(data)
 };
+
+const createCard = (data) => {
+  const card = new Card(handleCardClick, data, cardTemplateSelector);
+  const cardElement = card.generateCard();
+  rendererCards.addItem(cardElement)
+}
 
 const fillInputs = (userInfo) => {
   nameInput.value = userInfo.name;
@@ -84,6 +89,7 @@ const addFormSubmitHandler = () => {
   popupWithAddForm.open()
 };
 
+const popupWithImage = new PopupWithImage(popUpTypeImageSelector);
 
 const editFormElementValidator = new FormValidator(formElementClasses, editFormElement);
 editFormElementValidator.enableValidation();
@@ -93,10 +99,8 @@ addFormElementValidator.enableValidation();
 
 const rendererCards = new Section({
   items: preparedCards,
-  renderer: (item) => {
-    const card = new Card(handleCardClick, item, cardTemplateSelector);
-    const cardElement = card.generateCard();
-    rendererCards.addItem(cardElement);
+  renderer: (data) => {
+    createCard(data);
   }
 }, cardsContainerSelector);
 
@@ -108,9 +112,7 @@ const userInfo = new UserInfo({
 const popupWithAddForm = new PopupWithForm({
   popupSelector: popUpTypeAddSelector,
   formSubmit: (data) => {
-    const card = new Card(handleCardClick, data, cardTemplateSelector);
-    const cardElement = card.generateCard();
-    rendererCards.addItem(cardElement);
+    createCard(data);
   }
 });
 

@@ -5,6 +5,7 @@ export default class PopupWithForm extends Popup{
     super(popupSelector);
     this._formSubmit = formSubmit;
     this._form = this._popup.querySelector('form');
+    this._submitButton = this._form.querySelector('.form__submit-button')
     this._inputList = this._form.querySelectorAll('.form__input')
   }
 
@@ -12,6 +13,8 @@ export default class PopupWithForm extends Popup{
   close() {
     super.close();
     this._form.reset();
+    this._submitButton.classList.add('form__submit-button_disable');
+    this._submitButton.setAttribute("disabled", true);
   }
 
 

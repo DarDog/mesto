@@ -1,12 +1,12 @@
 //Импорт для webpack
-import './pages/index.css'
+import './index.css'
 // Пути к изображениям для webpack
-const sakhalinKholmsk = new URL('./images/kholmskoe-vodohranilishe.jpg', import.meta.url),
-    japan = new URL('./images/japan.jpg', import.meta.url),
-    italy = new URL('./images/italy.jpg', import.meta.url),
-    franch = new URL('./images/Franch.jpg', import.meta.url),
-    sakhalinChertovMost = new URL('./images/chertov-most.jpg', import.meta.url),
-    castleBurgEltz = new URL('./images/Burg Eltz.jpg', import.meta.url);
+const sakhalinKholmsk = new URL('../images/kholmskoe-vodohranilishe.jpg', import.meta.url),
+    japan = new URL('../images/japan.jpg', import.meta.url),
+    italy = new URL('../images/italy.jpg', import.meta.url),
+    franch = new URL('../images/Franch.jpg', import.meta.url),
+    sakhalinChertovMost = new URL('../images/chertov-most.jpg', import.meta.url),
+    castleBurgEltz = new URL('../images/Burg Eltz.jpg', import.meta.url);
 
 
 import {
@@ -24,13 +24,13 @@ import {
   profileDescription,
   profileName,
   popUpTypeAddSelector
-} from './utils/constants.js'
-import Card from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import Section from './components/Section.js';
-import PopupWithImage from "./components/PopupWithImage.js";
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js'
+} from '../utils/constants.js'
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js'
 
 
 export const preparedCards = [

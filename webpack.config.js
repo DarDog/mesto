@@ -5,7 +5,7 @@ const path = require('path'),
 
 module.exports = {
   target: ['web', 'es5'],
-  entry: { main: './src/index.js' },
+  entry: { main: './src/pages/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',

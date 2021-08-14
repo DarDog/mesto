@@ -128,11 +128,13 @@ const popupWithEditForm = new PopupWithForm({
 rendererCards.renderItems();
 
 editButton.addEventListener("click", () => {
+  editFormElementValidator.resetErrors();
   popupWithEditForm.open();
   fillInputs(userInfo.getUserInfo())
 });
 
 addButton.addEventListener('click', () => {
+  addFormElementValidator.resetErrors();
   popupWithAddForm.open();
 });
 

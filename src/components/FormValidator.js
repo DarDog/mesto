@@ -15,6 +15,12 @@ export default class FormValidator {
     this._setEventListeners()
   }
 
+  resetErrors() {
+    this._inputList.forEach(inputElement => {
+      this._hideInputError(inputElement)
+    })
+  }
+
 
   _toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {

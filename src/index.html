@@ -74,6 +74,15 @@
     <button type="button" class="pop-up__exit-button pop-up__exit-button_place_image-pop-up"></button>
   </div>
 </article>
+<article class="pop-up pop-up_content_delete">
+  <div class="pop-up__background">
+    <h2 class="pop-up__title">Вы уверены?</h2>
+    <form novalidate class="form" name="deleteForm">
+      <button type="submit" class="form__submit-button" name="submitButton">ДА</button>
+    </form>
+    <button type="button" class="pop-up__exit-button"></button>
+  </div>
+</article>
 <template class="card-template">
   <li class="card">
     <img src="/" alt="тут будет 'alt' добавляемой картинки" class="card__image">
@@ -82,7 +91,6 @@
       <button class="card__like-button" type="button"></button>
       <p class="card__like-count"></p>
     </div>
-    <button class="card__delete-button" type="button"></button>
   </li>
 </template>
 </body>

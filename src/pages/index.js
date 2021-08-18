@@ -13,6 +13,7 @@ import {
   nameInput,
   popUpTypeEditSelector,
   popUpTypeImageSelector,
+  popUpTypeDeleteSelector,
   profileDescription,
   profileName,
   profileAvatar,
@@ -25,6 +26,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithDeleteForm from "../components/PopupWithDeleteForm.js";
 import UserInfo from '../components/UserInfo.js';
 import Api from "../components/Api.js";
 
@@ -33,8 +35,12 @@ const handleCardClick = (data) => {
   popupWithImage.open(data)
 };
 
+const handleDeleteClick = (data) => {
+  popupWithDeleteForm.open(data)
+}
+
 const createCard = (data) => {
-  const card = new Card(handleCardClick, data, cardTemplateSelector);
+  const card = new Card(handleCardClick, handleDeleteClick, data, cardTemplateSelector);
   return card.generateCard();
 }
 
@@ -57,14 +63,6 @@ const fillProfile = (userInfo) => {
   profileName.textContent = userInfo.name;
   profileDescription.textContent = userInfo.description;
   profileAvatar.src = userInfo.avatar;
-};
-
-const editFormSubmitHandler = () => {
-  popupWithEditForm.open()
-};
-
-const addFormSubmitHandler = () => {
-  popupWithAddForm.open()
 };
 
 
@@ -110,6 +108,17 @@ const popupWithEditForm = new PopupWithForm({
   }
 })
 
+const popupWithDeleteForm = new PopupWithDeleteForm({
+  popupSelector: popUpTypeDeleteSelector,
+  formSubmit: (data) => {
+    data.card.remove()
+    api.deleteCard(data.id)
+        .catch((err) => {
+          console.log(err)
+        })
+  }
+});
+
 
 api.getUserInfo()
     .then((data) => {
@@ -141,7 +150,3 @@ addButton.addEventListener('click', () => {
   addFormElementValidator.resetErrors();
   popupWithAddForm.open();
 });
-
-editFormElement.addEventListener('submit', editFormSubmitHandler);
-
-addFormElement.addEventListener('submit', addFormSubmitHandler);

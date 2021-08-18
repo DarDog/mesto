@@ -76,4 +76,21 @@ export default class Api {
           }
         });
   }
+
+  deleteCard(data) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards/${data}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+    })
+        .then((res) => {
+          if (res.ok) {
+            return res.json()
+          } else {
+            return Promise.reject(`Ошибка: ${res.status}`)
+          }
+        });
+  }
 }

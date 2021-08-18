@@ -1,13 +1,5 @@
 //Импорт для webpack
 import './index.css'
-// Пути к изображениям для webpack
-const sakhalinKholmsk = new URL('../images/kholmskoe-vodohranilishe.jpg', import.meta.url),
-    japan = new URL('../images/japan.jpg', import.meta.url),
-    italy = new URL('../images/italy.jpg', import.meta.url),
-    franch = new URL('../images/Franch.jpg', import.meta.url),
-    sakhalinChertovMost = new URL('../images/chertov-most.jpg', import.meta.url),
-    castleBurgEltz = new URL('../images/Burg Eltz.jpg', import.meta.url);
-
 
 import {
   addButton,
@@ -37,42 +29,23 @@ import UserInfo from '../components/UserInfo.js';
 import Api from "../components/Api.js";
 
 
-export const preparedCards = [
-  {
-    cardName: 'Сахалин Холмск',
-    cardLink: sakhalinKholmsk
-  },
-  {
-    cardName: 'Япония',
-    cardLink: japan
-  },
-  {
-    cardName: 'Италия',
-    cardLink: italy
-  },
-  {
-    cardName: 'Франция',
-    cardLink: franch
-  },
-  {
-    cardName: 'Сахалин Чертов мост',
-    cardLink: sakhalinChertovMost
-  },
-  {
-    cardName: 'Замок Burg Eltz',
-    cardLink: castleBurgEltz
-  },
-];
-
-
 const handleCardClick = (data) => {
   popupWithImage.open(data)
 };
 
 const createCard = (data) => {
   const card = new Card(handleCardClick, data, cardTemplateSelector);
-  const cardElement = card.generateCard();
-  rendererCards.addItem(cardElement)
+  return card.generateCard();
+}
+
+const addCard = (items) => {
+  const rendererCards = new Section({
+    items,
+    renderer: (data) => {
+      rendererCards.addItem(createCard(data));
+    }
+  }, cardsContainerSelector);
+  rendererCards.renderItems();
 }
 
 const fillInputs = (userInfo) => {
@@ -100,14 +73,6 @@ const api = new Api({
   token: token
 })
 
-api.getUserInfo()
-    .then((data) => {
-      fillProfile(data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-
 const popupWithImage = new PopupWithImage(popUpTypeImageSelector);
 
 const editFormElementValidator = new FormValidator(formElementClasses, editFormElement);
@@ -115,13 +80,6 @@ editFormElementValidator.enableValidation();
 
 const addFormElementValidator = new FormValidator(formElementClasses, addFormElement);
 addFormElementValidator.enableValidation();
-
-const rendererCards = new Section({
-  items: preparedCards,
-  renderer: (data) => {
-    createCard(data);
-  }
-}, cardsContainerSelector);
 
 const userInfo = new UserInfo({
   name: profileName.textContent,
@@ -131,7 +89,7 @@ const userInfo = new UserInfo({
 const popupWithAddForm = new PopupWithForm({
   popupSelector: popUpTypeAddSelector,
   formSubmit: (data) => {
-    createCard(data);
+    addCard([data]);
   }
 });
 
@@ -144,7 +102,22 @@ const popupWithEditForm = new PopupWithForm({
 })
 
 
-rendererCards.renderItems();
+api.getUserInfo()
+    .then((data) => {
+      fillProfile(data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+api.getInitialCards()
+    .then((data) => {
+      addCard(data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
 
 editButton.addEventListener("click", () => {
   editFormElementValidator.resetErrors();

@@ -23,6 +23,7 @@ import {
   popUpTypeImageSelector,
   profileDescription,
   profileName,
+  profileAvatar,
   popUpTypeAddSelector,
   cohort,
   token
@@ -81,7 +82,8 @@ const fillInputs = (userInfo) => {
 
 const fillProfile = (userInfo) => {
   profileName.textContent = userInfo.name;
-  profileDescription.textContent = userInfo.description;
+  profileDescription.textContent = userInfo.about;
+  profileAvatar.src = userInfo.avatar;
 };
 
 const editFormSubmitHandler = () => {
@@ -97,6 +99,14 @@ const api = new Api({
   cohort: cohort,
   token: token
 })
+
+api.getUserInfo()
+    .then((data) => {
+      fillProfile(data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 
 const popupWithImage = new PopupWithImage(popUpTypeImageSelector);
 

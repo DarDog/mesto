@@ -76,10 +76,4 @@ export default class Api {
           }
         });
   }
-
-  sendCardToConsole(data) {
-    console.log(data);
-    console.log(`На сервер ушел name '${data.name}'`)
-    console.log(`На сервер ушел link '${data.link}'`)
-  }
 }

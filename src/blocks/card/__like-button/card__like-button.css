@@ -10,6 +10,7 @@
   justify-self: center;
   align-self: center;
   transition: opacity .3s;
+  margin-bottom: 3px;
 }
 
 .card__like-button:hover {

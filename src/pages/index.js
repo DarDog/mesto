@@ -55,7 +55,7 @@ const fillInputs = (userInfo) => {
 
 const fillProfile = (userInfo) => {
   profileName.textContent = userInfo.name;
-  profileDescription.textContent = userInfo.about;
+  profileDescription.textContent = userInfo.description;
   profileAvatar.src = userInfo.avatar;
 };
 
@@ -96,15 +96,23 @@ const popupWithAddForm = new PopupWithForm({
 const popupWithEditForm = new PopupWithForm({
   popupSelector: popUpTypeEditSelector,
   formSubmit: (data) => {
-    userInfo.setUserInfo(data);
-    fillProfile(userInfo.getUserInfo());
+    api.editUserInfo(data)
+        .then((data) => {
+          userInfo.setUserInfo(data);
+          fillProfile(userInfo.getUserInfo())
+        })
+        .catch((err) => {
+          console.log(err)
+        })
   }
 })
 
 
 api.getUserInfo()
     .then((data) => {
-      fillProfile(data)
+      userInfo.setUserInfo(data);
+      userInfo.setUserAvatar(data.avatar);
+      fillProfile(userInfo.getUserInfo())
     })
     .catch((err) => {
       console.log(err)

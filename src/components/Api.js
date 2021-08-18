@@ -35,7 +35,7 @@ export default class Api {
         });
   }
 
-  editUserInfo(data) {
+  sendUserInfo(data) {
     return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -56,4 +56,30 @@ export default class Api {
         });
   }
 
+  sendCard(data) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      })
+    })
+        .then((res) => {
+          if (res.ok) {
+            return res.json()
+          } else {
+            return Promise.reject(`Ошибка: ${res.status}`)
+          }
+        });
+  }
+
+  sendCardToConsole(data) {
+    console.log(data);
+    console.log(`На сервер ушел name '${data.name}'`)
+    console.log(`На сервер ушел link '${data.link}'`)
+  }
 }

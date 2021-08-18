@@ -89,14 +89,17 @@ const userInfo = new UserInfo({
 const popupWithAddForm = new PopupWithForm({
   popupSelector: popUpTypeAddSelector,
   formSubmit: (data) => {
-    addCard([data]);
+    api.sendCard(data)
+        .then((data) => {
+          addCard([data])
+        })
   }
 });
 
 const popupWithEditForm = new PopupWithForm({
   popupSelector: popUpTypeEditSelector,
   formSubmit: (data) => {
-    api.editUserInfo(data)
+    api.sendUserInfo(data)
         .then((data) => {
           userInfo.setUserInfo(data);
           fillProfile(userInfo.getUserInfo())
@@ -120,6 +123,7 @@ api.getUserInfo()
 
 api.getInitialCards()
     .then((data) => {
+      data.reverse()
       addCard(data)
     })
     .catch((err) => {

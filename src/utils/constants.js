@@ -10,7 +10,9 @@ export const popUpTypeImageSelector = '.pop-up_content_image',
     profileName = document.querySelector('.profile__title'),
     profileDescription = document.querySelector('.profile__subtitle'),
     cardsContainerSelector = '.elements__cards',
-    cardTemplateSelector = '.card-template';
+    cardTemplateSelector = '.card-template',
+    cohort = 'cohort-27',
+    token = 'd9890bda-3f75-4adf-b332-5e1f920022f8';
 
 export const formElementClasses = {
   inputSelector: '.form__input',

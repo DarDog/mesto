@@ -23,14 +23,17 @@ import {
   popUpTypeImageSelector,
   profileDescription,
   profileName,
-  popUpTypeAddSelector
+  popUpTypeAddSelector,
+  cohort,
+  token
 } from '../utils/constants.js'
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from '../components/PopupWithForm.js';
-import UserInfo from '../components/UserInfo.js'
+import UserInfo from '../components/UserInfo.js';
+import Api from "../components/Api.js";
 
 
 export const preparedCards = [
@@ -88,6 +91,12 @@ const editFormSubmitHandler = () => {
 const addFormSubmitHandler = () => {
   popupWithAddForm.open()
 };
+
+
+const api = new Api({
+  cohort: cohort,
+  token: token
+})
 
 const popupWithImage = new PopupWithImage(popUpTypeImageSelector);
 

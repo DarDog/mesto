@@ -39,8 +39,32 @@ const handleDeleteClick = (data) => {
   popupWithDeleteForm.open(data)
 }
 
+const handleLikeClick = ({ cardId, likeCount, isLiked }) => {
+  if (isLiked) {
+    api.sendLike(cardId)
+        .then((data) => {
+          likeCount.textContent = data.likes.length
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  } else {
+    api.deleteLike(cardId)
+        .then((data) => {
+          likeCount.textContent = data.likes.length
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  }
+}
+
 const createCard = (data) => {
-  const card = new Card(handleCardClick, handleDeleteClick, data, cardTemplateSelector);
+  const card = new Card({
+    handleCardClick: handleCardClick,
+    handleDeleteClick: handleDeleteClick,
+    handleLikeClick: handleLikeClick
+  }, data, cardTemplateSelector);
   return card.generateCard();
 }
 

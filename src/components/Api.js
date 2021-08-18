@@ -93,4 +93,38 @@ export default class Api {
           }
         });
   }
+
+  sendLike(data) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards/likes/${data}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      }
+    })
+        .then((res) => {
+          if (res.ok) {
+            return res.json()
+          } else {
+            return Promise.reject(`Ошибка: ${res.status}`)
+          }
+        });
+  }
+
+  deleteLike(data) {
+    return fetch(`https://mesto.nomoreparties.co/v1/${this._cohort}/cards/likes/${data}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+    })
+        .then((res) => {
+          if (res.ok) {
+            return res.json()
+          } else {
+            return Promise.reject(`Ошибка: ${res.status}`)
+          }
+        });
+  }
 }

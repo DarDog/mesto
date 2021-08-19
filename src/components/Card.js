@@ -1,11 +1,5 @@
 export default class Card {
-  constructor(handlers, data, template) {
-    this._name = data.name;
-    this._link = data.link;
-    this._likesList = data.likes
-    this._likeCount = this._likesList.length
-    this._id = data._id
-    this._autorId = data.owner._id
+  constructor(handlers, template) {
     this._template = template;
     this._handleCardClick = handlers.handleCardClick;
     this._handleDeleteClick = handlers.handleDeleteClick;
@@ -13,8 +7,14 @@ export default class Card {
   }
 
 
-  generateCard() {
+  generateCard(data) {
     this._element = this._getTemplate();
+    this._name = data.name;
+    this._link = data.link;
+    this._likesList = data.likes
+    this._likeCount = this._likesList.length
+    this._id = data._id
+    this._autorId = data.owner._id
     this._likeButton = this._element.querySelector('.card__like-button');
     this._cardLikes = this._element.querySelector('.card__like-count')
     this._likesList.forEach(el => {
@@ -41,6 +41,14 @@ export default class Card {
     return this._element
   }
 
+  _setLikesCount = (data) => {
+    this._cardLikes.textContent = data
+  }
+
+  _changeStateLikeButton = () => {
+    this._likeButton.classList.toggle('card__like-button_active');
+  }
+
 
   _getTemplate() {
     return document
@@ -48,24 +56,6 @@ export default class Card {
         .content
         .querySelector('.card')
         .cloneNode(true);
-  }
-
-  _changeStateLikeButton() {
-    this._likeButton.classList.toggle('card__like-button_active')
-
-    if (this._likeButton.classList.contains('card__like-button_active')) {
-      this._handleLikeClick({
-        cardId: this._id,
-        likeCount: this._cardLikes,
-        isLiked: true
-      })
-    } else {
-      this._handleLikeClick({
-        cardId: this._id,
-        likeCount: this._cardLikes,
-        isLiked: false
-      })
-    }
   }
 
   _deleteCard() {
@@ -77,7 +67,12 @@ export default class Card {
 
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
-      this._changeStateLikeButton();
+      this._handleLikeClick({
+        cardId: this._id,
+        isLiked: !this._likeButton.classList.contains('card__like-button_active'),
+      },
+      this._changeStateLikeButton,
+      this._setLikesCount)
     });
     if (this._deleteButton) {
       this._deleteButton.addEventListener('click', () => {

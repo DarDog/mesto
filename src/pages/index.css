@@ -9,6 +9,8 @@
 @import url('../blocks/header/__logo/header__logo.css');
 /*Блок main*/
 @import url('../blocks/main/main.css');
+@import url('../blocks/spinner/spinner.css');
+@import url('../blocks/spinner/_position_main/spinner_position_main.css');
 @import url('../blocks/page/__main/page__main.css');
 /*Блок profile*/
 @import url('../blocks/profile/profile.css');
@@ -54,3 +56,5 @@
 @import url('../blocks/form/__input/_type_error/form__input_type_error.css');
 @import url('../blocks/form/__input-error/_active/form__input-error_active.css');
 @import url('../blocks/form/__submit-button/_disable/form__submit-button_disable.css');
+@import url('../blocks/error/__massage/error__massage.css');
+@import url('../blocks/display-none/display-none.css');

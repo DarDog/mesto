@@ -11,7 +11,8 @@
 <header class="header page__header">
   <a href="#" target="_self" class="logo header__logo"></a>
 </header>
-<main class="main page__main">
+<div class="spinner spinner_position_main"></div>
+<main class="main page__main display-none">
   <section class="profile main__profile">
     <div class="profile__overlay">
       <img src="#" alt="аватар пользователя" class="profile__avatar">
@@ -74,7 +75,8 @@
     <h2 class="pop-up__title">Обновить аватар</h2>
     <form novalidate class="form" name="avatarForm">
       <label for="card-link-input" class="form__field">
-        <input type="url" class="form__input" placeholder="Ссылка на картинку" name="avatar" id="profile-avatar-link-input"
+        <input type="url" class="form__input" placeholder="Ссылка на картинку" name="avatar"
+               id="profile-avatar-link-input"
                required>
         <span class="form__input-error profile-avatar-link-input-error"></span>
       </label>
@@ -95,6 +97,16 @@
     <h2 class="pop-up__title">Вы уверены?</h2>
     <form novalidate class="form" name="deleteForm">
       <button type="submit" class="form__submit-button" name="submitButton">ДА</button>
+    </form>
+    <button type="button" class="pop-up__exit-button"></button>
+  </div>
+</article>
+<article class="pop-up pop-up_content_error-massage">
+  <div class="pop-up__background">
+    <h2 class="pop-up__title">Ой, что-то пошло не так!</h2>
+    <form novalidate class="form" name="errorMassageForm">
+      <p class="error_massage">Ошибка 404</p>
+      <button type="submit" class="form__submit-button" name="submitButton">Ок</button>
     </form>
     <button type="button" class="pop-up__exit-button"></button>
   </div>

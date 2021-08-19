@@ -8,10 +8,11 @@ export default class PopupWithDeleteForm extends Popup {
     this._submitButton = this._form.querySelector('.form__submit-button')
   }
 
-  open(data) {
+  open(data, deleteCard) {
     super.open();
     this._cardId = data.id;
-    this._cardElement = data.card
+    this._cardElement = data.card;
+    this._cardDeleter = deleteCard;
   }
 
 
@@ -24,7 +25,8 @@ export default class PopupWithDeleteForm extends Popup {
     evt.preventDefault();
     this._formSubmit({
       id: this._cardId,
-      card: this._cardElement
+      card: this._cardElement,
+      deleteCard: this._cardDeleter
     })
     this.close();
   }

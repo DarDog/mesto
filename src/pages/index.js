@@ -90,8 +90,8 @@ const handleCardClick = (data) => {
 
 const popupWithImage = new PopupWithImage(popUpTypeImageSelector);
 
-const handleDeleteClick = (data) => {
-  popupWithDeleteForm.open(data)
+const handleDeleteClick = (data, deleteCard) => {
+  popupWithDeleteForm.open(data, deleteCard)
 }
 
 const popupWithDeleteForm = new PopupWithDeleteForm({
@@ -99,7 +99,7 @@ const popupWithDeleteForm = new PopupWithDeleteForm({
   formSubmit: (data) => {
     api.deleteCard(data.id)
         .then(() => {
-          data.card.remove()
+          data.deleteCard()
         })
         .catch((err) => {
           showErrorMassage(err);

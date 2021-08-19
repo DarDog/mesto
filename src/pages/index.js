@@ -24,8 +24,8 @@ import {
   profileName,
   profileAvatar,
   popUpTypeAddSelector,
-  cohort,
-  token,
+  baseUrl,
+  headers,
   errorMassage,
   spinner,
   content
@@ -40,14 +40,16 @@ import UserInfo from '../components/UserInfo.js';
 import Api from "../components/Api.js";
 import PopupWithErrorMassageForm from "../components/PopupWithErrorMassageForm.js";
 
+
 const api = new Api({
-  cohort: cohort,
-  token: token
+  baseUrl: baseUrl,
+  headers: headers
 })
 
+
 Promise.all([
-    api.getUserInfo(),
-    api.getInitialCards()
+  api.getUserInfo(),
+  api.getInitialCards()
 ])
     .then((data) => {
       userInfo.setUserInfo(data[0]);
@@ -193,7 +195,7 @@ const popupWithAddForm = new PopupWithForm({
     submitButtonAddForm.textContent = 'Создание...'
     api.sendCard(data)
         .then((data) => {
-          rendererCards.addItem([data]);
+          rendererCards.addItem(createCard(data));
           popupWithAddForm.close()
         })
         .catch((err) => {

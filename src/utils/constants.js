@@ -20,10 +20,13 @@ export const popUpTypeImageSelector = '.pop-up_content_image',
     profileAvatar = document.querySelector('.profile__avatar'),
     cardsContainerSelector = '.elements__cards',
     cardTemplateSelector = '.card-template',
-    cohort = 'cohort-27',
-    token = 'd9890bda-3f75-4adf-b332-5e1f920022f8',
     spinner = document.querySelector('.spinner'),
-    content = document.querySelector('.main')
+    content = document.querySelector('.main'),
+    baseUrl = 'https://mesto.nomoreparties.co/v1/cohort-27',
+    headers = {
+      authorization: 'd9890bda-3f75-4adf-b332-5e1f920022f8',
+      'Content-Type': 'application/json'
+    }
 
 export const formElementClasses = {
   inputSelector: '.form__input',

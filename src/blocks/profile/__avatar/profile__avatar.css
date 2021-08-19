@@ -4,7 +4,11 @@
   height: 120px;
   object-fit: cover;
   object-position: center;
-  margin-right: 30px;
+  transition: opacity .3s;
+}
+
+.profile__avatar:hover {
+  opacity: .2;
 }
 
 @media screen and (max-width: 880px){

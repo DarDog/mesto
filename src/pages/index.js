@@ -9,11 +9,13 @@ import {
   descriptionInput,
   editButton,
   editFormElement,
+  avatarFormElement,
   formElementClasses,
   nameInput,
   popUpTypeEditSelector,
   popUpTypeImageSelector,
   popUpTypeDeleteSelector,
+  popUpTypeAvatarSelector,
   profileDescription,
   profileName,
   profileAvatar,
@@ -39,7 +41,7 @@ const handleDeleteClick = (data) => {
   popupWithDeleteForm.open(data)
 }
 
-const handleLikeClick = ({ cardId, likeCount, isLiked }) => {
+const handleLikeClick = ({cardId, likeCount, isLiked}) => {
   if (isLiked) {
     api.sendLike(cardId)
         .then((data) => {
@@ -103,6 +105,9 @@ editFormElementValidator.enableValidation();
 const addFormElementValidator = new FormValidator(formElementClasses, addFormElement);
 addFormElementValidator.enableValidation();
 
+const avatarFormElementValidator = new FormValidator(formElementClasses, avatarFormElement);
+avatarFormElementValidator.enableValidation()
+
 const userInfo = new UserInfo({
   name: profileName.textContent,
   description: profileDescription.textContent
@@ -130,7 +135,17 @@ const popupWithEditForm = new PopupWithForm({
           console.log(err)
         })
   }
-})
+});
+
+const popupWithAvatarEditForm = new PopupWithForm({
+  popupSelector: popUpTypeAvatarSelector,
+  formSubmit: (data) => {
+    api.sendAvatar(data)
+        .then((data) => {
+          profileAvatar.src = data.avatar
+        })
+  }
+});
 
 const popupWithDeleteForm = new PopupWithDeleteForm({
   popupSelector: popUpTypeDeleteSelector,
@@ -174,3 +189,8 @@ addButton.addEventListener('click', () => {
   addFormElementValidator.resetErrors();
   popupWithAddForm.open();
 });
+
+profileAvatar.addEventListener('click', () => {
+  avatarFormElementValidator.resetErrors();
+  popupWithAvatarEditForm.open();
+})

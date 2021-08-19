@@ -13,6 +13,7 @@
 /*Блок profile*/
 @import url('../blocks/profile/profile.css');
 @import url('../blocks/main/__profile/main__profile.css');
+@import url('../blocks/profile/__overlay/profile__overlay.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
 @import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__title/profile__title.css');

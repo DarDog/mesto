@@ -14,13 +14,12 @@ export default class Card {
     this._likesList = data.likes
     this._likeCount = this._likesList.length
     this._id = data._id
-    console.log(userID)
     this._autorId = data.owner._id
     this._likeButton = this._element.querySelector('.card__like-button');
     this._cardLikes = this._element.querySelector('.card__like-count')
     this._likesList.forEach(el => {
-      if (el._id === this._autorId) {
-        this._likeButton.classList.add('card__like-button_active')
+      if (el._id === userID) {
+        this._changeStateLikeButton()
       }
     })
     this._cardImage = this._element.querySelector('.card__image');

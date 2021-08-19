@@ -7,13 +7,14 @@ export default class Card {
   }
 
 
-  generateCard(data) {
+  generateCard(data, userID) {
     this._element = this._getTemplate();
     this._name = data.name;
     this._link = data.link;
     this._likesList = data.likes
     this._likeCount = this._likesList.length
     this._id = data._id
+    console.log(userID)
     this._autorId = data.owner._id
     this._likeButton = this._element.querySelector('.card__like-button');
     this._cardLikes = this._element.querySelector('.card__like-count')
@@ -23,7 +24,7 @@ export default class Card {
       }
     })
     this._cardImage = this._element.querySelector('.card__image');
-    if (this._autorId === this._autorId) {
+    if (this._autorId === userID) {
       this._deleteButton = document.createElement('button')
       this._element.append(this._deleteButton);
       this._deleteButton.classList.add('card__delete-button');

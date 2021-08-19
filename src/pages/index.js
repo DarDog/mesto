@@ -51,10 +51,10 @@ Promise.all([
   api.getUserInfo(),
   api.getInitialCards()
 ])
-    .then((data) => {
-      userInfo.setUserInfo(data[0]);
-      data[1].reverse()
-      rendererCards.renderItems(data[1])
+    .then(([userData, cards]) => {
+      userInfo.setUserInfo(userData);
+      cards.reverse()
+      rendererCards.renderItems(cards, userData._id)
     })
     .catch((err) => {
       showErrorMassage(err)
@@ -70,18 +70,18 @@ const userInfo = new UserInfo({
 });
 
 const rendererCards = new Section({
-  renderer: (data) => {
-    rendererCards.addItem(createCard(data));
+  renderer: (data, userId) => {
+    rendererCards.addItem(createCard(data, userId));
   }
 }, cardsContainerSelector);
 
-const createCard = (data) => {
+const createCard = (data, userId) => {
   const card = new Card({
     handleCardClick: handleCardClick,
     handleDeleteClick: handleDeleteClick,
     handleLikeClick: handleLikeClick
   }, cardTemplateSelector);
-  return card.generateCard(data)
+  return card.generateCard(data, userId)
 }
 
 const handleCardClick = (data) => {

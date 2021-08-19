@@ -46,9 +46,7 @@ export default class Api {
         link: data.link,
       })
     })
-        .then((res) => {
-          return this._getResponseData(res);
-        });
+        .then(this._getResponseData);
   }
 
   deleteCard(data) {
@@ -56,9 +54,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headersContent,
     })
-        .then((res) => {
-          return this._getResponseData(res);
-        });
+        .then(this._getResponseData);
   }
 
   sendLike(data) {
@@ -66,9 +62,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headersContent
     })
-        .then((res) => {
-          return this._getResponseData(res);
-        });
+        .then(this._getResponseData);
   }
 
   deleteLike(data) {
@@ -76,9 +70,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headersContent,
     })
-        .then((res) => {
-          return this._getResponseData(res);
-        });
+        .then(this._getResponseData);
   }
 
   sendAvatar(data) {
@@ -89,9 +81,7 @@ export default class Api {
         avatar: data.avatar
       })
     })
-        .then((res) => {
-          return this._getResponseData(res);
-        });
+        .then(this._getResponseData);
   }
 
 

@@ -45,70 +45,41 @@ const api = new Api({
   token: token
 })
 
-api.getUserInfo()
+Promise.all([
+    api.getUserInfo(),
+    api.getInitialCards()
+])
     .then((data) => {
-      userInfo.setUserInfo(data);
-      fillProfile(userInfo.getUserInfo())
+      userInfo.setUserInfo(data[0]);
+      data[1].reverse()
+      rendererCards.renderItems(data[1])
     })
     .catch((err) => {
-      showErrorMassage(err);
+      showErrorMassage(err)
+    })
+    .finally(() => {
+      setTimeout(showContent, 1000)
     })
 
 const userInfo = new UserInfo({
-  name: profileName.textContent,
-  description: profileDescription.textContent
+  name: profileName,
+  description: profileDescription,
+  avatar: profileAvatar
 });
 
-const fillProfile = (userInfo) => {
-  profileName.textContent = userInfo.name;
-  profileDescription.textContent = userInfo.description;
-  profileAvatar.src = userInfo.avatar;
-};
-
-const showErrorMassage = (err) => {
-  errorMassage.textContent = err
-  popupWithErrorMassage.open()
-}
-
-const popupWithErrorMassage = new PopupWithErrorMassageForm({
-  popupSelector: popUpTypeErrorMassageSelector,
-  formSubmit: () => {
-    popupWithErrorMassage.close();
+const rendererCards = new Section({
+  renderer: (data) => {
+    rendererCards.addItem(createCard(data));
   }
-});
-
-api.getInitialCards()
-    .then((data) => {
-      data.reverse()
-      addCard(data)
-      setTimeout(showContent, 1000)
-    })
-    .catch((err) => {
-      showErrorMassage(err);
-    })
-
-const showContent = () => {
-  spinner.classList.add('display-none')
-  content.classList.remove('display-none')
-}
-
-const addCard = (items) => {
-  const rendererCards = new Section({
-    items,
-    renderer: (data) => {
-      rendererCards.addItem(createCard(data));
-    }
-  }, cardsContainerSelector);
-  rendererCards.renderItems();
-}
+}, cardsContainerSelector);
 
 const createCard = (data) => {
   const card = new Card({
     handleCardClick: handleCardClick,
     handleDeleteClick: handleDeleteClick,
     handleLikeClick: handleLikeClick
-  }, data, cardTemplateSelector);
-  return card.generateCard();
+  }, cardTemplateSelector);
+  return card.generateCard(data)
 }
 
 const handleCardClick = (data) => {
@@ -124,33 +95,54 @@ const handleDeleteClick = (data) => {
 const popupWithDeleteForm = new PopupWithDeleteForm({
   popupSelector: popUpTypeDeleteSelector,
   formSubmit: (data) => {
-    data.card.remove()
     api.deleteCard(data.id)
+        .then(() => {
+          data.card.remove()
+        })
         .catch((err) => {
           showErrorMassage(err);
         })
   }
 });
 
-const handleLikeClick = ({cardId, likeCount, isLiked}) => {
-  if (isLiked) {
-    api.sendLike(cardId)
+const handleLikeClick = (data, changeStateLikeButton, setLikesCount) => {
+  if (data.isLiked) {
+    api.sendLike(data.cardId)
         .then((data) => {
-          likeCount.textContent = data.likes.length
+          changeStateLikeButton()
+          setLikesCount(data.likes.length)
         })
         .catch((err) => {
           showErrorMassage(err);
         })
   } else {
-    api.deleteLike(cardId)
+    api.deleteLike(data.cardId)
         .then((data) => {
-          likeCount.textContent = data.likes.length
+          changeStateLikeButton()
+          setLikesCount(data.likes.length)
         })
         .catch((err) => {
           showErrorMassage(err);
         })
   }
 }
+
+const showErrorMassage = (err) => {
+  errorMassage.textContent = err
+  popupWithErrorMassage.open()
+}
+
+const showContent = () => {
+  spinner.classList.add('display-none')
+  content.classList.remove('display-none')
+}
+
+const popupWithErrorMassage = new PopupWithErrorMassageForm({
+  popupSelector: popUpTypeErrorMassageSelector,
+  formSubmit: () => {
+    popupWithErrorMassage.close();
+  }
+});
 
 const editFormElementValidator = new FormValidator(formElementClasses, editFormElement);
 editFormElementValidator.enableValidation();
@@ -174,12 +166,13 @@ const popupWithEditForm = new PopupWithForm({
     api.sendUserInfo(data)
         .then((data) => {
           userInfo.setUserInfo(data);
-          fillProfile(userInfo.getUserInfo());
           popupWithEditForm.close()
-          submitButtonEditForm.textContent = 'Сохранить'
         })
         .catch((err) => {
           showErrorMassage(err);
+        })
+        .finally(() => {
+          submitButtonEditForm.textContent = 'Сохранить'
         })
   }
 });
@@ -200,12 +193,14 @@ const popupWithAddForm = new PopupWithForm({
     submitButtonAddForm.textContent = 'Создание...'
     api.sendCard(data)
         .then((data) => {
-          addCard([data]);
+          rendererCards.addItem([data]);
           popupWithAddForm.close()
-          submitButtonAddForm.textContent = 'Создать'
         })
         .catch((err) => {
           showErrorMassage(err);
+        })
+        .finally(() => {
+          submitButtonAddForm.textContent = 'Создать'
         })
   }
 });
@@ -223,10 +218,12 @@ const popupWithAvatarEditForm = new PopupWithForm({
         .then((data) => {
           profileAvatar.src = data.avatar;
           popupWithAvatarEditForm.close()
-          submitButtonAvatarForm.textContent = 'Сохранить'
         })
         .catch((err) => {
           showErrorMassage(err);
+        })
+        .finally(() => {
+          submitButtonAvatarForm.textContent = 'Сохранить'
         })
   }
 });

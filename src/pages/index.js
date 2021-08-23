@@ -107,26 +107,12 @@ const popupWithDeleteForm = new PopupWithDeleteForm({
   }
 });
 
-const handleLikeClick = (data, changeStateLikeButton, setLikesCount) => {
-  if (data.isLiked) {
-    api.sendLike(data.cardId)
-        .then((data) => {
-          changeStateLikeButton()
-          setLikesCount(data.likes.length)
-        })
-        .catch((err) => {
-          showErrorMassage(err);
-        })
-  } else {
-    api.deleteLike(data.cardId)
-        .then((data) => {
-          changeStateLikeButton()
-          setLikesCount(data.likes.length)
-        })
-        .catch((err) => {
-          showErrorMassage(err);
-        })
-  }
+const handleLikeClick = (data) => {
+  return data.isLiked ? api.sendLike(data.cardId).catch((err) => {
+    showErrorMassage(err)
+  }) : api.deleteLike(data.cardId).catch((err) => {
+    showErrorMassage(err)
+  })
 }
 
 const showErrorMassage = (err) => {

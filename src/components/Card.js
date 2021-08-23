@@ -41,14 +41,14 @@ export default class Card {
     return this._element
   }
 
-  _setLikesCount = (data) => {
+
+  _setLikesCount (data) {
     this._cardLikes.textContent = data
   }
 
-  _changeStateLikeButton = () => {
+  _changeStateLikeButton () {
     this._likeButton.classList.toggle('card__like-button_active');
   }
-
 
   _getTemplate() {
     return document
@@ -68,9 +68,13 @@ export default class Card {
             cardId: this._id,
             isLiked: !this._likeButton.classList.contains('card__like-button_active'),
           },
-          this._changeStateLikeButton,
-          this._setLikesCount)
+      )
+          .then((data) => {
+            this._changeStateLikeButton();
+            this._setLikesCount(data.likes.length)
+          })
     });
+
     if (this._deleteButton) {
       this._deleteButton.addEventListener('click', () => {
         this._handleDeleteClick({
@@ -80,6 +84,7 @@ export default class Card {
             this._deleteCard)
       });
     }
+
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick({
         link: this._link,

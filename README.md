@@ -14,6 +14,7 @@ ___
 
 Клонировать репозиторий, в терминале ввести:
 
+    npm install
     npm run build
     npm run dev
     
